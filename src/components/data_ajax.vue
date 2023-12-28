@@ -11,14 +11,16 @@
   </template>
   
   <script setup lang="ts">
-
+  let KEN_All:any = []
   const openMenu = () => {
       let xhr = new XMLHttpRequest()
-      xhr.open('GET', 'utf_all.csv', true)
+      xhr.open('GET', './utf_all.csv', true)
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
             console.log('xhr.status',xhr.responseText )
+            KEN_All = SetData( xhr.responseText )
+            alert(KEN_All.length)
           } else {
             console.log('Error!')
           }
@@ -28,4 +30,34 @@
       }
         xhr.send(null)
   }
+
+  function SetData( basedata:any ){
+    let array =[]
+    let data = basedata.split('\r\n')
+    for (let i in data){
+      let line = data[i].replace(/\"/g, '')
+      let tmp = line.split(',')
+      let item = {
+        id : i,
+        localcd : tmp[0],
+        post5 : tmp[1],
+        post : tmp[2],
+        prefkana : tmp[3],
+        citykana : tmp[4],
+        townkana : tmp[5],
+        prefname : tmp[6],
+        cityname : tmp[7],
+        townname : tmp[8],
+        flg1 : tmp[9],
+        flg2 : tmp[10],
+        flg3 : tmp[11],
+        flg4 : tmp[12],
+        flg5 : tmp[13],
+        flg6 : tmp[14],
+        kencd : tmp[0].substr(0,2),
+      }
+      array.push(item)
+    }
+    return array
+  } 
   </script>

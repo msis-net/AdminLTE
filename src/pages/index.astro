@@ -2,9 +2,10 @@
 import Layout from "@layouts/Layout.astro";
 import Ajax from "@components/data_ajax.vue"
 import Datatables from "@components/data_datatables.vue";
+const path = "."
 ---
 
-<Layout title="dashboard" path = "." page="index">
+<Layout title="dashboard" path = {path} page="index">
 	<main class="app-main"> <!--begin::App Content Header-->
         <div class="app-content-header"> <!--begin::Container-->
             <div class="container-fluid"> <!--begin::Row-->
@@ -101,8 +102,8 @@ import Datatables from "@components/data_datatables.vue";
                                         <div class="direct-chat-infos clearfix"> <span class="direct-chat-name float-start">
                                                 Alexander Pierce
                                             </span> <span class="direct-chat-timestamp float-end">
-                                                23 Jan 2:00 pm
-                                            </span> </div> <!-- /.direct-chat-infos --> <img class="direct-chat-img" src={"/assets/img/user1-128x128.jpg"} alt="message user image"> <!-- /.direct-chat-img -->
+                                                23 Jan 2:00 pmx
+                                            </span> </div> <!-- /.direct-chat-infos --> <img class="direct-chat-img" src={path+"/assets/img/user1-128x128.jpg"} alt="message user image"> <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
                                             Is this template really for free? That's unbelievable!
                                         </div> <!-- /.direct-chat-text -->
@@ -112,7 +113,7 @@ import Datatables from "@components/data_datatables.vue";
                                                 Sarah Bullock
                                             </span> <span class="direct-chat-timestamp float-start">
                                                 23 Jan 2:05 pm
-                                            </span> </div> <!-- /.direct-chat-infos --> <img class="direct-chat-img" src={"/assets/img/user3-128x128.jpg"} alt="message user image"> <!-- /.direct-chat-img -->
+                                            </span> </div> <!-- /.direct-chat-infos --> <img class="direct-chat-img" src={path+"/assets/img/user3-128x128.jpg"} alt="message user image"> <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
                                             You better believe it!
                                         </div> <!-- /.direct-chat-text -->
@@ -122,7 +123,7 @@ import Datatables from "@components/data_datatables.vue";
                                                 Alexander Pierce
                                             </span> <span class="direct-chat-timestamp float-end">
                                                 23 Jan 5:37 pm
-                                            </span> </div> <!-- /.direct-chat-infos --> <img class="direct-chat-img" src="/assets/img/user1-128x128.jpg" alt="message user image"> <!-- /.direct-chat-img -->
+                                            </span> </div> <!-- /.direct-chat-infos --> <img class="direct-chat-img" src={path+"/assets/img/user1-128x128.jpg"} alt="message user image"> <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">
                                             Working with AdminLTE on a great new app! Wanna join?
                                         </div> <!-- /.direct-chat-text -->
@@ -132,13 +133,13 @@ import Datatables from "@components/data_datatables.vue";
                                                 Sarah Bullock
                                             </span> <span class="direct-chat-timestamp float-start">
                                                 23 Jan 6:10 pm
-                                            </span> </div> <!-- /.direct-chat-infos --> <img class="direct-chat-img" src="/assets/img/user3-128x128.jpg" alt="message user image"> <!-- /.direct-chat-img -->
+                                            </span> </div> <!-- /.direct-chat-infos --> <img class="direct-chat-img" src={path+"/assets/img/user3-128x128.jpg"} alt="message user image"> <!-- /.direct-chat-img -->
                                         <div class="direct-chat-text">I would love to.</div> <!-- /.direct-chat-text -->
                                     </div> <!-- /.direct-chat-msg -->
                                 </div> <!-- /.direct-chat-messages--> <!-- Contacts are loaded here -->
                                 <div class="direct-chat-contacts">
                                     <ul class="contacts-list">
-                                        <li> <a href="#"> <img class="contacts-list-img" src="/assets/img/user1-128x128.jpg" alt="User Avatar">
+                                        <li> <a href="#"> <img class="contacts-list-img" src={ path + "/assets/img/user1-128x128.jpg" }  alt="User Avatar">
                                                 <div class="contacts-list-info"> <span class="contacts-list-name">
                                                         Count Dracula
                                                         <small class="contacts-list-date float-end">
@@ -147,7 +148,7 @@ import Datatables from "@components/data_datatables.vue";
                                                         How have you been? I was...
                                                     </span> </div> <!-- /.contacts-list-info -->
                                             </a> </li> <!-- End Contact Item -->
-                                        <li> <a href="#"> <img class="contacts-list-img" src="/assets/img/user7-128x128.jpg" alt="User Avatar">
+                                        <li> <a href="#"> <img class="contacts-list-img" src={path+"/assets/img/user7-128x128.jpg"} alt="User Avatar">
                                                 <div class="contacts-list-info"> <span class="contacts-list-name">
                                                         Sarah Doe
                                                         <small class="contacts-list-date float-end">
@@ -156,7 +157,7 @@ import Datatables from "@components/data_datatables.vue";
                                                         I will be waiting for...
                                                     </span> </div> <!-- /.contacts-list-info -->
                                             </a> </li> <!-- End Contact Item -->
-                                        <li> <a href="#"> <img class="contacts-list-img" src="/assets/img/user3-128x128.jpg" alt="User Avatar">
+                                        <li> <a href="#"> <img class="contacts-list-img" src={path+"/assets/img/user3-128x128.jpg"} alt="User Avatar">
                                                 <div class="contacts-list-info"> <span class="contacts-list-name">
                                                         Nadia Jolie
                                                         <small class="contacts-list-date float-end">
@@ -165,7 +166,7 @@ import Datatables from "@components/data_datatables.vue";
                                                         I'll call you back at...
                                                     </span> </div> <!-- /.contacts-list-info -->
                                             </a> </li> <!-- End Contact Item -->
-                                        <li> <a href="#"> <img class="contacts-list-img" src="/assets/img/user5-128x128.jpg" alt="User Avatar">
+                                        <li> <a href="#"> <img class="contacts-list-img" src={path+"/assets/img/user5-128x128.jpg"} alt="User Avatar">
                                                 <div class="contacts-list-info"> <span class="contacts-list-name">
                                                         Nora S. Vans
                                                         <small class="contacts-list-date float-end">
@@ -174,7 +175,7 @@ import Datatables from "@components/data_datatables.vue";
                                                         Where is your new...
                                                     </span> </div> <!-- /.contacts-list-info -->
                                             </a> </li> <!-- End Contact Item -->
-                                        <li> <a href="#"> <img class="contacts-list-img" src="/assets/img/user6-128x128.jpg" alt="User Avatar">
+                                        <li> <a href="#"> <img class="contacts-list-img" src={path+"/assets/img/user6-128x128.jpg"} alt="User Avatar">
                                                 <div class="contacts-list-info"> <span class="contacts-list-name">
                                                         John K.
                                                         <small class="contacts-list-date float-end">
@@ -183,7 +184,7 @@ import Datatables from "@components/data_datatables.vue";
                                                         Can I take a look at...
                                                     </span> </div> <!-- /.contacts-list-info -->
                                             </a> </li> <!-- End Contact Item -->
-                                        <li> <a href="#"> <img class="contacts-list-img" src="/assets/img/user8-128x128.jpg" alt="User Avatar">
+                                        <li> <a href="#"> <img class="contacts-list-img" src={path+"/assets/img/user8-128x128.jpg"} alt="User Avatar">
                                                 <div class="contacts-list-info"> <span class="contacts-list-name">
                                                         Kenneth M.
                                                         <small class="contacts-list-date float-end">
@@ -247,7 +248,7 @@ import Datatables from "@components/data_datatables.vue";
 <!-- OPTIONAL SCRIPTS -->
 
     <!-- apexcharts -->
-    <script
+    <script is:inline
       src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
       integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8="
       crossorigin="anonymous"></script>
@@ -313,11 +314,11 @@ import Datatables from "@components/data_datatables.vue";
     </script>
 
     <!-- jsvectormap -->
-    <script
+    <script is:inline
       src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"
       integrity="sha256-/t1nN2956BT869E6H4V1dnt0X5pAQHPytli+1nTZm2Y="
       crossorigin="anonymous"></script>
-    <script
+    <script is:inline
       src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/maps/world.js"
       integrity="sha256-XPpPaZlU8S/HWf7FZLAncLg2SAkP8ScUTII89x9D3lY="
       crossorigin="anonymous"></script>
