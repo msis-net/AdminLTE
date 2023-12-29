@@ -14,7 +14,7 @@
   let KEN_All:any = []
   const openMenu = () => {
       let xhr = new XMLHttpRequest()
-      xhr.open('GET', './utf_all.csv', true)
+      xhr.open('GET', 'utf_all.csv', true)
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
