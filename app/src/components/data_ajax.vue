@@ -10,7 +10,7 @@
     </div>
   </template>
   
-  <script setup lang="ts">
+  <script setup lang="ts" is:inline>
   let KEN_All:any = []
   const openMenu = () => {
       let xhr = new XMLHttpRequest()

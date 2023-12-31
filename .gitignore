@@ -19,3 +19,6 @@ app/.env.production
 
 # macOS-specific files
 app/.DS_Store
+
+# sftp
+.vscode/
