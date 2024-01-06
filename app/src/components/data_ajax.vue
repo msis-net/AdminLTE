@@ -5,12 +5,39 @@
           Read Server CSV
         </button>
         
-
+        <button role="button" @click="CallPerformScript()">
+          Call PerformScript
+        </button>
       </nav>
     </div>
   </template>
   
   <script setup lang="ts" is:inline>
+
+const CallPerformScript = () => {
+  try{
+        let result = {
+          post : "sss1580083",
+          address : "東京都世田谷区奥沢６丁目",
+          addresskana : "トウキョウトセタガヤクオクザワ６チョウメ"
+        }
+        
+        //エラー回避の為result変数をDummy関数に渡す
+        Dummy(result) 
+
+        //FileMaker関数は通常エラーとなるため、eval関数で評価して実行する
+        eval('FileMaker.PerformScript ("AlertAddress", JSON.stringify(result))')
+        
+      }catch(e){
+        console.log('Not Claris FileMaker Platform！')
+      }
+}
+
+ function Dummy(val:any){
+    console.log(val)
+    return val
+ }
+
   let KEN_All:any = []
   const openMenu = () => {
       let xhr = new XMLHttpRequest()
