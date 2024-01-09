@@ -1,8 +1,23 @@
-# Astro Starter Kit: Basics
+# Astro x Vue3 Starter Kit: Basics
+
 
 ```sh
-npm create astro@latest -- --template basics
+npm ci
 ```
+### 最初から登録した場合
+
+```sh
+npm create astro@latest（Astroプロジェクトからの場合）
+Vueを使う
+npm i @vueuse/core
+npx astro add vue
+
+atatables.net-vue3
+npm install --save datatables.net-vue3
+npm run build　で　dist に作成
+```
+
+
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
