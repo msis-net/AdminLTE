@@ -9,7 +9,7 @@ export default defineConfig({
     // Example: Generate `page.html` instead of `page/index.html` during build.
     format: 'file',
   },
-  server: { port: 1234, host: false },
+  server: { port: 1234, host: true },
   integrations: [
     vue(),
     relativeLinks(),

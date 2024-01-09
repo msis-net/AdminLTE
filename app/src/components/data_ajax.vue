@@ -21,11 +21,7 @@ const CallPerformScript = () => {
           address : "東京都世田谷区奥沢６丁目",
           addresskana : "トウキョウトセタガヤクオクザワ６チョウメ"
         }
-        
-        //エラー回避の為result変数をDummy関数に渡す
-        Dummy(result) 
-
-        //FileMaker関数は通常エラーとなるため、eval関数で評価して実行する
+        Dummy(result)
         eval('FileMaker.PerformScript ("AlertAddress", JSON.stringify(result))')
         
       }catch(e){

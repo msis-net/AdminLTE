@@ -1,4 +1,4 @@
-<script setup lang="ts" is:inline>
+<script setup lang="ts">
 import DataTable from 'datatables.net-vue3';
 import DataTablesCore from 'datatables.net';
 
@@ -56,6 +56,6 @@ const columns = [
   </div>
 </template>
 
-<style is:inline>
+<style>
 @import 'datatables.net-dt';
 </style>
