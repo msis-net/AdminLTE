@@ -14,6 +14,7 @@ const values = useStore(valData)
 console.log("values",values.value)
 
 
+
 //カレンダー開始日（１月前）
 //const startDate = ref(new Date(2023, 0,31));
 let stymd = dayjs(date.value).add(-1,"month").format("YYYY-MM-DD")

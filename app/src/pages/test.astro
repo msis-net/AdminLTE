@@ -1,0 +1,44 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Fmdataapi from "@components/vue/fmdataapi.vue";
+
+const label = 'Test Page'
+const path = "."
+
+let id:string | null = '' ;
+
+try {
+  if (Astro.request.method === 'GET') {
+    const url = new URL(Astro.request.url);
+    const params = new URLSearchParams(url.search);
+    id = params.get('id');
+    //console.log("ehr_index:",params)
+  }
+  
+} catch (error) {
+  console.error(error);
+}
+---
+
+<Layout title="dashboard" path = {path} page="test">
+	<main class="app-main"> <!--begin::App Content Header-->
+        <div class="app-content-header"> <!--begin::Container-->
+            <div class="container-fluid"> <!--begin::Row-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3 class="mb-0">{id}:{label}</h3>
+                        <Fmdataapi ptid={id} client:load />
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div> <!--end::Row-->
+            </div> <!--end::Container-->
+        </div>
+    </main> <!--end::App Main--> <!--begin::Footer-->
+</Layout>
+
+<script is:inline>
+
+
+
+</script>

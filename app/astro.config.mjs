@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
-import vue from "@astrojs/vue";
 import node from "@astrojs/node";
+import vue from "@astrojs/vue";
+import react from '@astrojs/react';
 import relativeLinks from 'astro-relative-links';
 
 import node from "@astrojs/node";
@@ -17,7 +18,7 @@ export default defineConfig({
     port: 1234,
     host: false //ネットワーク全てのif空の接続を許可
   },
-  integrations: [vue(), relativeLinks()],
+  integrations: [vue(), relativeLinks(),react()],
   output: "server",
   adapter: node({
     mode: "standalone"

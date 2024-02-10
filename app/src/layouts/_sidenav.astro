@@ -74,6 +74,15 @@ const htmlPath = convertPathToHtml(path);
                 <p>Dashboard v3</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a
+                href={htmlPath + "/test"}
+                class:list={["nav-link", page === "test" && "active"]}
+              >
+                <i class="nav-icon bi bi-circle"></i>
+                <p>TestPage</p>
+              </a>
+            </li>
           </ul>
         </li>
         <li class:list={["nav-item", mainPage === "ehr" && "menu-open"]}>
