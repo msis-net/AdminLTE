@@ -41,6 +41,10 @@ ncu -u --target minor
 依存関係が解決できずエラーになってしまった場合は、npm audit fix --forceコマンドで自動的に修正してくれます。（との事）
 > npm audit fix --force
 
+#### Astro Toolbarを隠す
+[/app] >npx astro preferences disable devToolbar
+◯ devToolbar is now  disabled
+
 ---
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
