@@ -1,0 +1,43 @@
+---
+import {convertPathToHtml} from "@utils/index.js";
+const {path} = Astro.props;
+const htmlPath = convertPathToHtml(path);
+---
+<aside class="app-sidebar container-fluid float-sm-end h-100">
+    <a href={htmlPath + "./listnav"} class="fw-bold">Index</a>
+    <ul class="list">
+        <!--li><a href="{% url 'htmldoc:man_env' '000' %}#001">本マニュアルの表現に関して</a></li-->
+        <li>
+            <a href={htmlPath + "./listnav"} class=""></a>menu#1</a>
+        </li>
+        <li>
+            <a href={htmlPath + "./listnav"} class=""></a>menu#2</a>
+        </li>
+        <li>
+            <a href={htmlPath + "./listnav"} class=""></a>menu#3</a>
+        </li>
+        <ul>
+                <li><a href={htmlPath + "./listnav"} class=""></a>menu#3-1</a></li>
+                <li><a href={htmlPath + "./listnav"} class=""></a>menu#3-2</a></li>
+        </ul>
+    </ul>
+</aside>
+
+<style>
+    aside{
+        font-size: 1.0em;
+        padding-left: 1em;
+    }
+    aside a, li{
+        text-decoration: none;
+        color:#666;
+    }
+    
+    aside ul.list li{
+        margin-left: -1em;
+    }
+    
+    aside ul.list ul li{
+        margin-left: -2em;
+    }
+</style>

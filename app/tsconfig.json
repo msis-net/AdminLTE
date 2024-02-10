@@ -18,7 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "@layouts/*": ["src/layouts/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
     }
   }
 }
