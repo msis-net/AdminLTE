@@ -2,7 +2,8 @@
 
 
 ```sh
-npm ci
+[/] cd app/
+[/app] npm ci
 ```
 ### 最初から登録した場合
 
