@@ -5,20 +5,43 @@
 [/]> cd app
 [/app]> npm ci
 ```
-### 最初から登録した場合
+### 基本環境のパッケージバージョンに関して
+基本的にnpm ciによる package-lock.jsonからの正確なバージョンのパッケージをインストールする。
 
-```sh
-npm create astro@latest（Astroプロジェクトからの場合）
-Vueを使う
-npm i @vueuse/core
-npx astro add vue
+#### 但し、Nodeバージョンによってパッケージが利用できない場合は以下の２通りでたい
 
-atatables.net-vue3
-npm install --save datatables.net-vue3
-npm run build　で　dist に作成
-```
+1. Nodeバージョンを切り替える
+   nvm:nodeのバージョンを管理する
+   nvm use 18
+2. バージョンアップして個々に対応する
+
+#### グローバルインストールされたパッケージを削除する。
+
+コマンド:npm uninstall -g XXXX
+手動：C:\Users\eve\AppData\Roaming\npm\node_modules/以下を削除
+
+---
+
+#### プロジェクト内のバージョン管理（全体のバージョンアップなどでも利用）
 
 
+現在のライブラリのversionを確認
+
+> npm outdated
+> npm-check-updatesを利用し、マイナーバージョンのみアップデートを実施
+
+※npm-check-updatesはグローバル環境にインストール(npm i -g npm-check-update)
+
+ncu -u --target minor
+※package.jsonが更新されたので、その状態でnpm install コマンドを実行
+> npm install
+
+もし、npm installでerrorを吐く場合
+
+依存関係が解決できずエラーになってしまった場合は、npm audit fix --forceコマンドで自動的に修正してくれます。（との事）
+> npm audit fix --force
+
+---
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
