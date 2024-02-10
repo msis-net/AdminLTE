@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import vue from "@astrojs/vue";
+import node from "@astrojs/node";
 import relativeLinks from 'astro-relative-links';
 
 import node from "@astrojs/node";
