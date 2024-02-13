@@ -21,6 +21,6 @@ RUN apt install -y vim less nmap
 COPY ./.alias /root/
 RUN cat /root/.alias >> /root/.bashrc
 
-
 RUN mkdir app
+
 WORKDIR /app
