@@ -1,11 +1,10 @@
 import { persistentAtom } from '@nanostores/persistent';
-import { atom } from 'nanostores';
 
-const currentDate = persistentAtom('currentDate','');
+const currentDate = persistentAtom<string>('currentDate', '' );
 //export const statusStore = persistentAtom('');
 
 export type SettingsValue = {
-    correntDate:'',
+    correntDate: String,
     Hospinf: {},
     authdata: {},
     vByoto: {},

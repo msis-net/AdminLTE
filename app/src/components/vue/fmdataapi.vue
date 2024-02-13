@@ -8,7 +8,7 @@ import { ref, onMounted, onUpdated, watch  } from 'vue';
 
 //コンポーネント間で共有する日付データ
 import { useStore } from '@nanostores/vue';
-import { currentDate, valData } from '@store/userStore' 
+import { currentDate, valData } from '@/store/userStore' 
 const date = ref(useStore(currentDate))
 const values = useStore(valData)
 console.log("date"+JSON.stringify(date.value))

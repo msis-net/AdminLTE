@@ -6,7 +6,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
   
 import { useStore } from '@nanostores/vue';
-import { currentDate, valData } from '@store/userStore'
+import { currentDate, valData } from '@/store/userStore'
 import dayjs from "dayjs";
 //const date = ref(useStore(currentDate))
 const date = useStore(currentDate)

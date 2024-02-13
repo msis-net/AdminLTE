@@ -1,7 +1,14 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
+import DateSelector from "@/components/react/dateselector"
+import Test from "@/components/react/test"
 ---
 
 <Layout title="Dashborad2" path = "../" page="index2">
-
+    <div>
+        <Test client:load />
+    </div>
+    <div>
+        <DateSelector client:only="react" />
+    </div>
 </Layout>

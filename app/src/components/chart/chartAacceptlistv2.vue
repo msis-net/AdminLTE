@@ -3,7 +3,7 @@ import { ref, reactive, onMounted, watch } from 'vue'
 import VueApexCharts from "vue3-apexcharts";
 
 import { useStore } from '@nanostores/vue'
-import { currentDate, valData } from '@store/userStore'
+import { currentDate, valData } from '@/store/userStore'
 const date = ref(useStore(currentDate))
 const values = useStore(valData)
 

@@ -4,8 +4,6 @@ import vue from "@astrojs/vue";
 import react from '@astrojs/react';
 import relativeLinks from 'astro-relative-links';
 
-import node from "@astrojs/node";
-
 // https://astro.build/config
 export default defineConfig({
   compressHTML: false,
