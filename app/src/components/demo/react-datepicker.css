@@ -1,0 +1,48 @@
+.react-datepicker { font-size:0.8em !important }
+.react-datepicker__day-name, .react-datepicker__day {
+    width: 1.3em !important; 
+    line-height: 1.2em !important;
+    margin: 0.em !important;
+}
+.react-datepicker__current-month { font-size: 1em !important }
+.react-datepicker__navigation {
+    top: 0.2em !important;
+    line-height: 1.8em !important;
+    border: 0.45em solid transparent !important;
+}
+.react-datepicker__navigation--previous {
+    border-right-color: #ccc;
+    left: 1em;
+}
+
+.react-datepicker__day--outside-month{
+    color:#bbb
+}
+.react-datepicker__header {
+    background-color: var(--blue300);
+}
+/*疑似要素で"年"を追加*/
+.react-datepicker__current-month::after {
+    content: '年';
+ }
+/*６番目：土曜日想定*/
+.react-datepicker__day-name:nth-of-type(6), .react-datepicker__day:nth-of-type(6) {
+    color: blue;
+}
+/*７番目：日曜想定*/
+.react-datepicker__day-name:nth-of-type(7), .react-datepicker__day:nth-of-type(7){
+    color: red;
+}
+
+/*日付のコントロール*/
+.react-datepicker__day--highlighted{
+    color:#999;
+    background-color: lightgreen;
+}
+/*
+.react-datepicker__day--today{
+}
+
+.react-datepicker__day--keyboard-selected{
+}
+*/

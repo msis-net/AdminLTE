@@ -4,7 +4,8 @@ import { currentDate } from '@/store/userStore'
 import { format } from "date-fns";
 
 
-export const DateSelector = () => { 
+export const DateSelector = () => {
+  
   const date = useStore(currentDate)
 
   useEffect(() => {
@@ -20,12 +21,8 @@ export const DateSelector = () => {
 
   const changeDate = (event:any) => {
     console.log("index:event",new Date(event.target.value) )
-    if(!event.target.value){
-      console.log("削除はできません。")
-    }else{
-      const ymd = format(new Date(event.target.value) , 'yyyy-MM-dd')
-      currentDate.set(ymd)
-    }
+    const ymd = format(new Date(event.target.value) , 'yyyy-MM-dd')
+    currentDate.set(ymd)
   }
   
   const inputStyle = {
@@ -38,12 +35,7 @@ export const DateSelector = () => {
 
   return (
     <>
-    <input 
-      type="date" 
-      style={inputStyle}
-      value={date} 
-      onChange={changeDate}
-    />
+    <input type="date" style={inputStyle} value={date} onChange={changeDate}/>
     </> 
   );
 };

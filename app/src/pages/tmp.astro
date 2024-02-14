@@ -3,6 +3,8 @@ import Layout from "@/layouts/Layout.astro";
 import DateSelector from "@/components/react/dateselector"
 import DemoApp01 from "@/components/demo/demoApp01";
 import DemoApp02 from "@/components/demo/demoApp02";
+import DemoApp03 from "@/components/demo/demoApp03";
+import Vuedatepicker from "@/components/vue/vuedatepicker.vue";
 ---
 
 <Layout title="Dashborad2" path = "../" page="index2">
@@ -26,7 +28,7 @@ import DemoApp02 from "@/components/demo/demoApp02";
                   
               </div>
           </div> <!--end::Row-->
-            <div class="row mt-3">
+          <div class="row mt-3">
               <div class="col-sm-6">
               <div>三目ならべ</div>
                 <DemoApp02 client:load />
@@ -35,13 +37,21 @@ import DemoApp02 from "@/components/demo/demoApp02";
                   
               </div>
           </div> <!--end::Row-->
+          <div class="row mt-3">
+            <DemoApp03 client:only="react" />
+        </div> <!--end::Row-->
+        <div class="row mt-3">
+          <Vuedatepicker client:only="vue" />
+      </div> <!--end::Row-->
         </div> <!--end::Container-->
     </div>
   </main> 
 </Layout>
 
 <style is:inline>
-    
+ .react-datepicker{
+  font-size: 0.6.em;
+ }   
 .square {
   background: #fff;
   border: 1px solid #999;
