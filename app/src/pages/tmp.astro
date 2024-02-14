@@ -1,14 +1,77 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import DateSelector from "@/components/react/dateselector"
-import Test from "@/components/react/test"
+import DemoApp01 from "@/components/demo/demoApp01";
+import DemoApp02 from "@/components/demo/demoApp02";
 ---
 
 <Layout title="Dashborad2" path = "../" page="index2">
-    <div>
-        <Test client:load />
+  <main class="app-main"> <!--begin::App Content Header-->
+    <div class="app-content-header"> <!--begin::Container-->
+        <div class="container-fluid"> <!--begin::Row-->
+            <div class="row">
+                <div class="col-sm-6">
+                  <DateSelector client:load />
+                </div>
+                <div class="col-sm-6">
+                    
+                </div>
+            </div> <!--end::Row-->
+            <div class="row mt-3">
+              <div class="col-sm-6">
+                <div>Counter</div>
+                <DemoApp01 client:only="react"/>
+              </div>
+              <div class="col-sm-6">
+                  
+              </div>
+          </div> <!--end::Row-->
+            <div class="row mt-3">
+              <div class="col-sm-6">
+              <div>三目ならべ</div>
+                <DemoApp02 client:load />
+              </div>
+              <div class="col-sm-6">
+                  
+              </div>
+          </div> <!--end::Row-->
+        </div> <!--end::Container-->
     </div>
-    <div>
-        <DateSelector client:only="react" />
-    </div>
+  </main> 
 </Layout>
+
+<style is:inline>
+    
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+</style>@/components/demo/demoApp02

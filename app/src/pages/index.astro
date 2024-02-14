@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Dateselect from "@/components/vue/dateselect.vue";
+import DateSelector from "@/components/react/dateselector"
+
 import Acceptlistv2 from "@/components/orca_api/acceptlistv2.vue";
 import ChartAcceptlistv2 from "@/components/chart/chartAacceptlistv2.vue"
 const path = "."
@@ -12,7 +13,8 @@ const path = "."
             <div class="container-fluid"> <!--begin::Row-->
                 <div class="row">
                     <div class="col-sm-6">
-                      <Dateselect @changeDate="changeDate" client:load />
+                      <DateSelector client:load />
+                      
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">

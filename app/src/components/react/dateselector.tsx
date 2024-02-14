@@ -1,56 +1,45 @@
-
-import { useState } from 'react';
+import { useEffect  } from 'react';
 import { useStore } from '@nanostores/react';
-import { currentDate, valData } from '@/store/userStore' 
-console.log("dateselector",currentDate.value,valData.value)
-
+import { currentDate } from '@/store/userStore' 
 import { format } from "date-fns";
 
 
-
-const DateSelector = () => {
+export const DateSelector = () => {
+  
   const date = useStore(currentDate)
-  console.log("isLogin:True",date)
-  const [count, setCount] = useState(0);
 
-  if(sessionStorage.isLoggin){
-    console.log("isLogin:True",date)
-  }else{
-    //セッションが無い場合は現在日時をcurrentDateに登録する
-    console.log("isLogin:False")
-    const ymd = format(new Date(), 'yyyy-MM-dd')
+  useEffect(() => {
+    if(sessionStorage.isLoggin){
+      console.log("isLogin:True",date)
+    }else{
+      //セッションが無い場合は現在日時をcurrentDateに登録する
+      console.log("isLogin:False")
+      const ymd = format(new Date(), 'yyyy-MM-dd')
+      currentDate.set(ymd)
+    }
+  }, []);
+
+  const changeDate = (event:any) => {
+    console.log("index:event",new Date(event.target.value) )
+    const ymd = format(new Date(event.target.value) , 'yyyy-MM-dd')
     currentDate.set(ymd)
-    //sessionStorage.setItem( "isLoggin" , String(new Date()) )
-    console.log("sessionStorage-after",sessionStorage.getItem("isLogin"))
-
   }
+  
+  const inputStyle = {
+    border: "solid 0px #999",
+    borderRadius:'var(--dp-border-radius, 5px)',
+    padding:'0.1em',
+    lineHeight: '2.15rem',
+    fontSize: '1.6em',
+  };
 
-  function handleClick() {
-    setCount(count + 1)
-    console.log("count",count)
-  }
-
-  function MyButton() {
-    
-        return (
-          <button onClick={handleClick}>Clicked {count} times</button>
-        );
- }
   return (
     <>
-      <input type="date" id="setDate"/>
-      
-      <style>{`
-              input {
-                      color: #0f0;
-                  }
-                
-        `}</style>  
-    </>
-        
+    <input type="date" style={inputStyle} value={date} onChange={changeDate}/>
+    </> 
   );
 };
-  
+ 
 export default DateSelector;
   
   
