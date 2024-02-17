@@ -143,5 +143,17 @@ watch(() => date.value, () => {
 .dp__cell_highlight {
   background-color: greenyellow;
 }
+
+/*幅が狭くなった場合の文字位置を中央にする*/
+.dp-custom-cell {
+  margin: 0 auto;
+}
+/*小さい画面でカレンダーを表示させない場合は以下を有効にする
+@media screen and (max-width: 767px) {
+  .dp__main{
+    display: none;
+  }
+}
+*/
 </style>
   

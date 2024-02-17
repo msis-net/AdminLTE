@@ -1,7 +1,9 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import DateInput from "@/components/svelte/dateinput.svelte"
-import Acceptlistv2 from "@/components/svelte/acceptlist.svelte";
+
+import Acceptlistv2 from "@/components/orca_api/acceptlistv2.vue";
+import ChartAcceptlistv2 from "@/components/chart/chartAacceptlistv2.vue"
 const path = "."
 ---
 
@@ -38,12 +40,12 @@ const path = "."
                 <div class="container-fluid"> 
                   <div class="row">
                     <div class="col-md-12">
-                      <div>sss</div>
-                      <Acceptlistv2 client:only="svelte" />
+                      <Acceptlistv2 client:visible />
                     </div> 
                   </div>
                   <div class="row">
                     <div class="row mt-3">
+                      <ChartAcceptlistv2 client:only="vue" />
                     </div>
                   </div>
                   <div class="row">

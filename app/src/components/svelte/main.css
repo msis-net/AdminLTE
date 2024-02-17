@@ -1,0 +1,39 @@
+/*検索文字列*/
+input.gridjs-input {
+    border: 0px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    /*text-align: center;*/
+}
+
+.gridjs{
+    color:red;
+}
+
+.gridjs-container{
+    color:#333;
+}
+
+.gridjs-wrapper, .gridjs-temp{
+    border: '0px solid #ccc',
+}
+
+.gridjs-wrapper, .gridjs-footer{
+    border: initial;/*取消*/
+    border-top: 1px solid #ddd;
+    border-radius: 0px;
+    
+    box-shadow: initial;/*initial*/
+    
+}
+
+.gridjs-footer{
+    border-top: 1px solid #ccc;
+    background-color: initial;/*背景*/
+}
+
+/*偶数行ごとに色分け*/
+.gridjs-tbody tr:nth-child(even) td {
+    /*border-top: 1px solid #ccc;*/
+	background: #eee;
+}

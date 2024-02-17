@@ -1,7 +1,7 @@
 <script>
     import Grid from "gridjs-svelte";
     import "gridjs/dist/theme/mermaid.css";
-    import "./index.css";
+    import "./main.css";
     const data = [
         { id: 9, name: "Denzel", age: 24, city: "Newcastle" },
         { id: 12, name: "Olga", age: 35, city: "Las Cruces" },
@@ -36,10 +36,8 @@
         }
     }
 
-    
-
     const pagination ={
-        limit: 5,
+        limit: 10,
         summary: true
     }
 
@@ -75,6 +73,8 @@
             formatter: (_, row) => `$${(row.cells[0].data + row.cells[2].data).toLocaleString()} USD`
         },
     ]
+
+
 </script>
 
 <Grid
