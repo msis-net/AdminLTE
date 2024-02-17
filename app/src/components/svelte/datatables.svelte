@@ -22,16 +22,11 @@
     ];
 
     
-  </script>
+</script>
   
-  <Grid 
+<Grid 
     search="true"
     sort ="true"
     data={data} 
-    />
+   />
   
-    <style>
-        table {
-            color:blueviolet;
-        }
-    </style>

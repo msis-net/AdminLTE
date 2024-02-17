@@ -1,7 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import SvelteDateSelector from "@/components/svelte/dateselector.svelte";
+import SvelteDateInput from "@/components/svelte/dateinput.svelte";
+import SvelteDateTables from "@/components/svelte/datatables.svelte";
 
 import ReactDateInput from "@/components/react/dateinput";
 import ReactDatePicker from "@/components/react/datepicker";
@@ -21,11 +22,16 @@ import DemoApp02 from "@/components/demo/demoApp02";
         <h3>Svelte</h3>
         <div class="row">
           <div class="col-sm-6">
-            <SvelteDateSelector client:load />
+            <SvelteDateInput client:load />
           </div>
           <div class="col-sm-6">
             <ul>
             </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <SvelteDateTables client:load />
           </div>
         </div>
         <div class="row">
@@ -44,6 +50,7 @@ import DemoApp02 from "@/components/demo/demoApp02";
               <li>少々つかいずらい</li>
               <li>幅が固定できない</li>
               <li>Vueとくらべて大きくなりがち</li>
+              <li>DataTablesはjQuey対応しかない</li>
             </ul>
           </div>
         </div>
