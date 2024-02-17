@@ -13,7 +13,7 @@ const date = useStore(currentDate)
 const values = useStore(valData)
 console.log("values",values.value)
 
-
+console.log("XXX",date.value,currentDate.value)
 
 //カレンダー開始日（１月前）
 //const startDate = ref(new Date(2023, 0,31));
@@ -66,7 +66,7 @@ watch(() => date.value, () => {
     calendar-cell-class-name="dp-custom-cell"
     @update:model-value="handleDate"
     >
-    <template #year="{ value }"> {{ value }}年 </template>
+    <template #year="{ value }">[{{ value }}]</template>
     </VueDatePicker>
 </template>
 <!--
@@ -101,7 +101,7 @@ watch(() => date.value, () => {
     --dp-input-padding: 6px 30px 6px 12px;
     --dp-menu-min-width: 260px;
     --dp-action-buttons-padding: 1px 6px;
-    --dp-row-margin: 1px 0px;/*行の高さ（デフォルト: 5px 0px）*/
+    --dp-row-margin: 0px 0px;/*行の高さ（デフォルト: 5px 0px）*/
     --dp-calendar-header-cell-padding: 0.5rem;
     --dp-multi-calendars-spacing: 10px;
     --dp-overlay-col-padding: 3px;
@@ -112,10 +112,36 @@ watch(() => date.value, () => {
     --dp-action-button-height: 22px;
     --dp-action-row-padding: 8px
 }
-
-
+.dp__calendar_header_separator{
+  margin-top: 5px;
+}
 .dp-custom-cell {
   border-radius: 50%;/*選択位置の形*/
+}
+
+/*月表示の部分*/
+.dp__month_year_select:nth-of-type(1){
+  font-weight: bold;
+}
+
+/*年表示の部分*/
+.dp__month_year_select:nth-of-type(2){
+  color:#999;
+}
+.dp__calendar_header_item:nth-of-type(6),
+.dp__calendar_item:nth-of-type(6)
+{
+  color: blue;
+}
+
+.dp__calendar_header_item:nth-of-type(7),
+.dp__calendar_item:nth-of-type(7)
+{
+  color: red;
+}
+
+.dp__cell_highlight {
+  background-color: greenyellow;
 }
 </style>
   

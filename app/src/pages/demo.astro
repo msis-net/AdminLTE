@@ -1,0 +1,111 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+import SvelteDateSelector from "@/components/svelte/dateselector.svelte";
+
+import ReactDateInput from "@/components/react/dateinput";
+import ReactDatePicker from "@/components/react/datepicker";
+
+import VueDateInput from "@/components/vue/dateinput.vue";
+import VueDatePicker from "@/components/vue/datepicker.vue";
+import VueDataTables from "@/components/vue/datatables.vue";
+import DemoApp02 from "@/components/demo/demoApp02";
+---
+
+<Layout title="Dashborad2" path="../" page="index2">
+  <main class="app-main">
+    <!--begin::App Content Header-->
+    <div class="app-content">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <h3>Svelte</h3>
+        <div class="row">
+          <div class="col-sm-6">
+            <SvelteDateSelector client:load />
+          </div>
+          <div class="col-sm-6">
+            <ul>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+          </div>
+        </div>
+        <hr>
+        <h3>React</h3>
+        <div class="row">
+          <div class="col-sm-8">
+            <ReactDateInput client:load />
+            <ReactDatePicker client:only="react" />
+          </div>
+          <div class="col-sm-4">
+            <ul>
+              <li>少々つかいずらい</li>
+              <li>幅が固定できない</li>
+              <li>Vueとくらべて大きくなりがち</li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+        <h3>Vue3</h3>
+        <div class="row">
+          <div class="col-sm-6">
+            <VueDateInput client:only="vue" />
+            <VueDatePicker client:only="vue" />
+          </div>
+          <div class="col-sm-6">
+            Vueがコントロールしやすい、storeも問題なし、コンパクト、早い、Storeも問題ない、
+            三目ならべは参考になる
+            <DemoApp02 client:load />
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-12">
+            <VueDataTables client:only="vue" />
+          </div>
+        </div>
+        <hr/>
+        
+    </div>
+  </main>
+</Layout>
+
+<style is:inline>
+  .react-datepicker {
+    font-size: 0.6.em;
+  }
+  .square {
+    background: #fff;
+    border: 1px solid #999;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 34px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 34px;
+  }
+
+  .board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+
+  .status {
+    margin-bottom: 10px;
+  }
+  .game {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .game-info {
+    margin-left: 20px;
+  }
+</style>@/components/demo/demoApp02
+@/components/react/dateinput
