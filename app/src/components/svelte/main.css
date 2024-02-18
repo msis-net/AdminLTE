@@ -22,9 +22,7 @@ input.gridjs-input {
     border: initial;/*取消*/
     border-top: 1px solid #ddd;
     border-radius: 0px;
-    
     box-shadow: initial;/*initial*/
-    
 }
 
 .gridjs-footer{
