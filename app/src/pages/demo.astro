@@ -3,6 +3,8 @@ import Layout from "@/layouts/Layout.astro";
 
 import SvelteDateInput from "@/components/svelte/dateinput.svelte";
 import SvelteDateTables from "@/components/svelte/datatables.svelte";
+import SvelteGridjs from "@/components/svelte/gridjs.svelte";
+import SvelteDateTablesNet from "@/components/svelte/datatables-net.svelte";
 
 import ReactDateInput from "@/components/react/dateinput";
 import ReactDatePicker from "@/components/react/datepicker";
@@ -30,12 +32,21 @@ import DemoApp02 from "@/components/demo/demoApp02";
           </div>
         </div>
         <div class="row">
+          <h5>svelte simple datatables</h5>
           <div class="col-sm-12">
             <SvelteDateTables client:only="svelte" />
           </div>
         </div>
         <div class="row">
+          <h5>DateTables-Net</h5>
           <div class="col-sm-12">
+            <SvelteDateTablesNet client:only="svelte" />
+          </div>
+        </div>
+        <div class="row">
+          <h5>Gridjs</h5>
+          <div class="col-sm-12">
+            <SvelteGridjs client:only="svelte" />
           </div>
         </div>
         <hr>

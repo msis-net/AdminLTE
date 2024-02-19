@@ -4,6 +4,7 @@
   import { format, formatDuration, intervalToDuration } from "date-fns"
 
   import Grid from "gridjs-svelte"
+  import { h } from "gridjs";
   import "gridjs/dist/theme/mermaid.css"
   import "./main.css"
 
@@ -59,7 +60,13 @@
     {
       id: "Acceptance_Id",
       name: "No",
-      data: (row) => `${Number(row.Acceptance_Id)}`,
+      /*data: (row) => `${Number(row.Acceptance_Id)}`,*/
+      formatter: (cell, row) => {
+          return h('button', {
+            className: 'btn-primary',
+            onClick: () => alert(`Editing "${row.cells[0].data}" "${row.cells[1].data}"`)
+          }, Number(row.cells[0].datad));
+        },
       sort: true,
     },
     {

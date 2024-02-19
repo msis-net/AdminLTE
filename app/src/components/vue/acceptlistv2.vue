@@ -288,7 +288,9 @@ const onselect = (event: any, chartContext: any, config: any) => {
 
 <style>
 @import 'datatables.net-dt';
+@import 'datatables.net-buttons-dt';
 @import 'datatables.net-responsive-dt';
+@import 'datatables.net-select-dt';
 
 /*対象データ無い時は表示を消す*/
 .dataTables_empty {

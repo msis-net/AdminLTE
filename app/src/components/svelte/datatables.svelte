@@ -1,90 +1,132 @@
-<script>
-    import Grid from "gridjs-svelte";
-    import "gridjs/dist/theme/mermaid.css";
-    import "./main.css";
-    const data = [
-        { id: 9, name: "Denzel", age: 24, city: "Newcastle" },
-        { id: 12, name: "Olga", age: 35, city: "Las Cruces" },
-        { id: 13, name: "Barry", age: 27, city: "Newport" },
-        { id: 10, name: "Anthony", age: 47, city: "Los Banos" },
-        { id: 2, name: "Mary", age: 45, city: "Los Angeles" },
-        { id: 1, name: "John", age: 21, city: "New York" },
-        { id: 3, name: "Mark", age: 23, city: "Boston" },
-        { id: 5, name: "Brian", age: 22, city: "New Orleans" },
-        { id: 14, name: "Larry", age: 41, city: "Los Altos" },
-        { id: 4, name: "Cris", age: 32, city: "Las Vegas" },
-        { id: 6, name: "Stuart", age: 46, city: "Los Gatos" },
-        { id: 7, name: "Owen", age: 24, city: "Boston" },
-        { id: 8, name: "Paul", age: 33, city: "Las Vegas" },
-        { id: 11, name: "Fred", age: 25, city: "Boston" },
-        { id: 15, name: "Richard", age: 29, city: "Boston" },
-        { id: 16, name: "Bruna", age: 31, city: "Las Vegas" },
-    ];
-    const style ={
-        table: {
-            border: '0px solid #ccc',
+<script lang="ts">
+    import { onMount } from 'svelte';
+    import { DataHandler, Datatable, Th, ThFilter  } from "@vincjo/datatables";
+
+    let myData ;
+    
+    const handler = new DataHandler(myData , {
+        rowsPerPage: 10,
+        i18n: {
+            search: "検索",
+            show: "表示",
+            entries: "件",
+            filter: "絞込み検索",
+            rowCount: "開始 {start} 終了 {end} / {total}",
+            noRows: "Aucun résultat",
+            previous: "＜前項",
+            next: "次項＞",
         },
-        th: {
-            padding: '0.2em'
-        },
-        td: {
-            padding: '0.2em',
-            fontSize: '1.0em'
-        },
-        footer:{
-            height: '60px'
-        }
+    });
+   
+    const rows = handler.getRows();
+
+    //const sort = handler.getSort()
+    //handler.sortDesc('id')
+    //handler.sortAsc('id')
+
+    const SelectRow = (arg:[]) => {
+        console.log("arg",arg)
     }
 
-    const pagination ={
-        limit: 10,
-        summary: true
+    onMount(() => {
+		get_data()
+	});
+
+    async function get_data() {
+        const jsonfile = `data.json`;
+        console.log("jsonfile",jsonfile)
+        await fetch(jsonfile) //読込
+            .then(response => response.json())
+            .then(result => {
+                console.log("xresult",result)
+                handler.setRows(result.data)
+            })
     }
-
-    const columns =[
-        {
-            name: "id",
-            sort: true,
-        },
-        {
-            id:"name",
-            name: "名前",
-            sort: true,
-        },
-        {
-            id:"age",
-            name: "年齢",
-            data: (row) => `${row.age} 歳`,
-            width:'60px',
-            sort: true,
-        },
-        {
-            name: "city",
-            sort: true,
-        },
-        {
-            name: "city",
-            formatter: (cell) => `Name: ${cell}`,
-            sort: true,
-        },
-        { 
-            name: 'Sum',
-            data: null,
-            formatter: (_, row) => `$${(row.cells[0].data + row.cells[2].data).toLocaleString()} USD`
-        },
-    ]
-
-
 </script>
 
-<Grid
-    search="true"
-    sort="true"
-    resizable="false"
-    fixedHeader="true"
-    {columns}
-    {pagination}
-    {style}
-    {data}
-/>
+<svelte:head>
+    <!--link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+		crossorigin="anonymous"
+	/-->
+    <style>
+        /*検索*/
+        header input.svelte-ykkz3r{
+            font-size: 1.0em;
+            padding:10px;
+            height:36px;
+        }
+    </style>
+</svelte:head>
 
+
+
+<Datatable {handler}
+    search={true} 
+    rowsPerPage={true} 
+    rowCount={true} 
+    pagination={true}
+    >
+    
+    <table>
+        <thead>
+            <tr>
+                <Th {handler} orderBy="Id">Id</Th>
+                <Th {handler} orderBy="Name">Name</Th>
+                <Th {handler} orderBy="Position">Position</Th>
+                <Th {handler} orderBy="Salary">Salary</Th>
+                <Th {handler} orderBy="Start_date">Start_date</Th>
+                <Th {handler} orderBy="Office">Office</Th>
+                <Th {handler} orderBy="Extn">Extn</Th>
+            </tr>
+            
+            <tr>
+                <ThFilter {handler} filterBy="id" />
+                <ThFilter {handler} filterBy="name"/>
+                <ThFilter {handler} filterBy="position" />
+                <ThFilter {handler} filterBy="salary" />
+                <ThFilter {handler} filterBy="start_date" />
+                <ThFilter {handler} filterBy="office" />
+                <ThFilter {handler} filterBy="extn" />
+            </tr>
+        </thead>
+        <tbody>
+            {#each $rows as row}
+                <tr>
+                    <td on:click={() => SelectRow(row.id)} >{row.id}</td>
+                    <td>{row.name}</td>
+                    <td>{row.position}</td>
+                    <td>{row.salary}</td>
+                    <td>{row.start_date}</td>
+                    <td>{row.office}</td>
+                    <td>{row.extn}</td>
+                </tr>
+            {/each}
+        </tbody>
+    </table>
+    
+</Datatable>
+
+
+<style>
+    thead {
+        background: #fff;
+    }
+    tbody td {
+        border: 1px solid #f5f5f5;
+        padding: 4px 20px;
+        white-space: nowrap;
+    }
+    tbody tr {
+        transition: all, 0.2s;
+    }
+    
+    /*偶数行ごとに色分け*/
+    table tr:nth-child(even) td {
+        /*border-top: 1px solid #ccc;*/
+
+        background-color: #eee;
+    }
+</style>

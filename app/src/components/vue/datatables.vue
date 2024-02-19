@@ -21,7 +21,7 @@ async function get_data() {
   await fetch(jsonfile) //読込
     .then(response => response.json())
     .then(result => {
-      console.log("result",result)
+      //console.log("result",result)
       data.value = result.data
     })
 
@@ -44,7 +44,7 @@ const columns = [
 ]
 const options = {
   //dom: 'Bfrtip',
-  //buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+  buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
   /*dom: 'Bfrtip',
         buttons: [
             {
@@ -97,4 +97,10 @@ const options = {
 .dataTables_empty {
   display: none;
 }
+
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
 </style>
