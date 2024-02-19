@@ -1,5 +1,5 @@
 <script>
-	import { vDate, vHospinf, vByoto, vSrynaiyo } from '@/store/userStore' 
+	import { vDate, vHospinf, vByoto, vSrynaiyo,vUpdate } from '@/store/userStore' 
 	import { format } from "date-fns";
 	let date = $vDate
 	
@@ -23,6 +23,7 @@
 			vByoto.set(	JSON.stringify(result.Byoto) )
 			vHospinf.set( JSON.stringify(result.Hospinf)　)
 			vSrynaiyo.set( JSON.stringify(result.Srynaiyo) )
+			vUpdate.set(String(new Date())) 
 			sessionStorage.setItem( "isLoggin" , String(new Date()) )
 		})
 		.catch((e) => {

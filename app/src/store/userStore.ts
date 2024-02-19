@@ -15,5 +15,5 @@ const vDate = persistentAtom('vDate', '')
 const vHospinf = persistentAtom('vHospinf', '')
 const vByoto = persistentAtom('vByoto', '')
 const vSrynaiyo = persistentAtom('vSrynaiyo', '')
-
-export { vDate, vHospinf, vByoto, vSrynaiyo }
+const vUpdate = persistentAtom('vUpdate', '')
+export { vDate, vHospinf, vByoto, vSrynaiyo, vUpdate }
