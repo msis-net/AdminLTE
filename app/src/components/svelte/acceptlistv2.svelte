@@ -1,233 +1,141 @@
-<script>
-  import { onMount } from "svelte"
-  import { currentDate, valData } from "@/store/userStore"
-  import { format, formatDuration, intervalToDuration } from "date-fns"
-
-  import Grid from "gridjs-svelte"
-  import { h } from "gridjs";
-  import "gridjs/dist/theme/mermaid.css"
-  import "./main.css"
-
-  let date = $currentDate
-  let valdata = $valData
+<script lang="ts">
   
+  import { vDate, vSrynaiyo } from '@/store/userStore' 
+  import { format, intervalToDuration } from "date-fns";
+
+  import { DataHandler, Datatable, Th } from "@vincjo/datatables";
+
+  let date = $vDate
+  const Srynaiyo = JSON.parse($vSrynaiyo)
+  let myData;
   let counter = {
     now: 0,
     today: 0,
     endof: 0,
     other: 0,
-  }
-  currentDate.subscribe((value) => {
+  };
+  
+  vDate.subscribe((value) => {
     date = value;
   });
 
-  valData.subscribe((value) => {
-    valdata = value;
+
+  //console.log("counter", counter);
+  
+  const handler = new DataHandler(myData, {
+    rowsPerPage: 10,
+    i18n: {
+      search: "検索",
+      show: "表示",
+      entries: "件",
+      filter: "絞込み検索",
+      rowCount: "{start} - {end} / {total}",
+      noRows: "Aucun résultat",
+      previous: "前",
+      next: "次",
+    },
   });
 
-  app_init()
+  const rows = handler.getRows();
 
-  onMount(async () => {
-    
-  });
+  //const sort = handler.getSort()
+  //handler.sortDesc('id')
+  //handler.sortAsc('id')
 
-  let data = []
-
-  const style = {
-    table: {
-      border: "0px solid #ccc",
-    },
-    th: {
-      padding: "0.2em",
-      fontSize: "0.8em",
-    },
-    td: {
-      padding: "0.2em",
-      fontSize: "0.9em",
-      whiteSpace: "nowrap",
-    },
-    footer: {
-      height: "60px",
-    },
+  const SelectRow = (arg: []) => {
+    console.log("arg", arg);
   };
 
-  const pagination = {
-    limit: 10,
-    summary: true,
-  };
-
-  const columns = [
-    {
-      id: "Acceptance_Id",
-      name: "No",
-      /*data: (row) => `${Number(row.Acceptance_Id)}`,*/
-      formatter: (cell, row) => {
-          return h('button', {
-            className: 'btn-primary',
-            onClick: () => alert(`Editing "${row.cells[0].data}" "${row.cells[1].data}"`)
-          }, Number(row.cells[0].datad));
-        },
-      sort: true,
-    },
-    {
-      id: "Acceptance_Time",
-      name: "受付時間",
-      sort: true,
-    },
-    {
-      id: "Patient_ID",
-      name: "患者番号",
-      data: (row) => `${Number(row.Patient_Information.Patient_ID)}`,
-      sort: true,
-    },
-    {
-      id: "WholeName",
-      name: "患者氏名",
-      data: (row) => `${row.Patient_Information.WholeName}`,
-      sort: true,
-    },
-    {
-      id: "Sex",
-      name: "性",
-      data: (row) => {
-        if (row.Patient_Information.Sex === "1") {
-          return "男"
-        } else if (row.Patient_Information.Sex === "2") {
-          return "女"
-        } else {
-          return "不明"
-        }
-      },
-      sort: true,
-    },
-    {
-      id: "age",
-      name: "年齢",
-      data: (row) =>{ 
-        try{
-          return `${calcAge(row.Patient_Information.BirthDate, date )} 歳`
-        } catch(e){
-          return "-"
-        } 
-
-      },
-      width: "60px",
-      sort: true,
-    },
-    {
-      id: "department",
-      name: "診療科",
-      data: (row) =>{ 
-        return row.Department_Code+" "+row.Department_WholeName
-      },
-      sort: true,
-    },
-    {
-      id: "Physician_WholeName",
-      name: "ドクター",
-      data: (row) =>{
-        return row.Physician_WholeName
-      },
-      sort: true,
-    },
-    {
-      id: "Medical_Information",
-      name: "診療内容",
-      data: (row) =>{
-        const vSrynaiyo = valdata.vSrynaiyo
-        const srynaiyo = vSrynaiyo[row.Medical_Information]
-        return row.Medical_Information+" "+srynaiyo
-      },
-      width: "160px",
-      sort: true,
-    },
-    {
-      id: "HealthInsurance_Information",
-      name: "保険組合せ",
-      data: (row) =>{
-        const hkncmb = row.HealthInsurance_Information.Insurance_Combination_Number
-        const hknname = row.HealthInsurance_Information.InsuranceProvider_WholeName
-        let insname = ""
-        const PublicInsurance_Information=row.PublicInsurance_Information
-        for( var i in PublicInsurance_Information)
-          insname += " "+PublicInsurance_Information[i].PublicInsurance_Name
-        return hkncmb+" "+hknname+insname
-      },
-      sort: true,
-    },
-    {
-      id: "Account_Time",
-      name: "会計時刻",
-      data: (row) => {
-        if(row.Account_Time){
-          return row.Account_Time
-        }
-      },
-      sort: true,
-    },
-  ];
+  /*
+  onMount(() => {
+    const ymd = format(new Date(date), "yyyy-MM-dd");
+    console.log("ymd", ymd);
+    //get_data(ymd)
+  });*/
 
   $: {
     //日付変更
-    data = []
     const ymd = format(new Date(date), "yyyy-MM-dd");
-    console.log("ymd", ymd);
-    geyListData(ymd)
+    //console.log("ymd", ymd);
+    get_data(ymd);
   }
-  
-  async function app_init() {
-    const envfile = `./orca/env/sessionStrage.json`
-    await fetch(envfile)
-      .then(response => response.json())
-      .then(result => {
-        //valData.set(result)
-        console.log("result",result)
-        valData.set(result)
-      });
-      
-  }
-  async function geyListData(ymd) {
+
+  async function get_data(ymd: any) {
     const yyyy = format(ymd, "yyyy");
     const yyyymmdd = format(ymd, "yyyyMMdd");
-    //const jsonfile = `./orca/acceptlstv2/${yyyy}/acceptlstv2_20240125.json`;
-    const jsonfile = `./orca/acceptlstv2/${yyyy}/acceptlstv2_${yyyymmdd}.json`
-    console.log("geyListData", jsonfile);
+    const jsonfile = `./orca/acceptlstv2/${yyyy}/acceptlstv2_20240127.json`;
+    //const jsonfile = `./orca/acceptlstv2/${yyyy}/acceptlstv2_${yyyymmdd}.json`
+     console.log("jsonfile", jsonfile,yyyymmdd);
+
     await fetch(jsonfile) //読込
       .then((response) => response.json())
       .then((result) => {
-        const temp = result.Acceptlst_Information; //変数化
-        //counter.value.today = Object.keys(temp).length;
-        data = temp
-        console.log(temp);
-        
-      })
+        //console.log("xresult", result);
+        handler.setRows(result.Acceptlst_Information);
+      });
   }
 
-  function calcAge(stday , edday) {
-    console.log(stday,edday)
-    try{
-      const start = new Date(stday)
-      const end = new Date(edday)
-      const duration = intervalToDuration({ start, end });
-      console.log(duration)
-      return duration.years
-    }catch(e){
-      return "-"
+  function Sex(sex: string) {
+    if (sex === "1") {
+      return "男";
+    } else if (sex === "2") {
+      return "女";
+    } else {
+      return "不明";
     }
-    
   }
 
-  const listUpdate =(type) =>{
-    console.log("listUpdate",type)
+  function calcAge(stday: string, edday: string) {
+    //console.log(stday, edday);
+    try {
+      const start = new Date(stday);
+      const end = new Date(edday);
+      const duration = intervalToDuration({ start, end });
+      return duration.years;
+    } catch (e) {
+      return "-";
+    }
+  }
+
+  function getSrynaiyo(Medical_Information: string) {
+    return Srynaiyo[Medical_Information]
+  }
+
+  function Kohname(publicobj: [any]) {
+    let name=""
+    if(publicobj){
+      for(var i in publicobj){
+        name += publicobj[i].PublicInsurance_Name
+      }
+    }
+    return name;
+  }
+
+  function Account(time:string){
+    if(time){
+      return time
+    }else{
+      return ""
+    }
   }
 </script>
 
-<div>{date}</div>
+<svelte:head>
+  <style>
+    /*検索*/
+    header input.svelte-ykkz3r {
+      font-size: 1em;
+      padding: 10px;
+      height: 36px;
+    }
+  </style>
+</svelte:head>
+
 <div class="row">
   <div class="col-12 col-sm-6 col-md-3">
     <div class="info-box">
       <span class="info-box-icon text-bg-primary shadow-sm">
-        <i class="bi bi-people-fill" on:click={() => listUpdate("today")}></i>
+        <i class="bi bi-people-fill"></i>
       </span>
       <div class="info-box-content">
         <span class="info-box-text">本日</span>
@@ -242,7 +150,7 @@
   <div class="col-12 col-sm-6 col-md-3">
     <div class="info-box">
       <span class="info-box-icon text-bg-success shadow-sm">
-        <i class="bi bi-people" on:click={() => listUpdate("now")}></i>
+        <i class="bi bi-people"></i>
       </span>
       <div class="info-box-content">
         <span class="info-box-text">現在</span>
@@ -257,7 +165,7 @@
   <div class="col-12 col-sm-6 col-md-3">
     <div class="info-box">
       <span class="info-box-icon text-bg-warning shadow-sm">
-        <i class="bi bi-person-check-fill" on:click={() => listUpdate("endof")}></i>
+        <i class="bi bi-person-check-fill"></i>
       </span>
       <div class="info-box-content">
         <span class="info-box-text">会計済み</span>
@@ -272,7 +180,7 @@
   <div class="col-12 col-sm-6 col-md-3">
     <div class="info-box">
       <span class="info-box-icon text-bg-danger shadow-sm">
-        <i class="bi bi-person-check-fill" on:click={() => listUpdate("other")}></i>
+        <i class="bi bi-person-check-fill"></i>
       </span>
       <div class="info-box-content">
         <span class="info-box-text">その他</span>
@@ -284,16 +192,87 @@
   </div>
   <!-- /.col -->
 </div>
-<!--<div>{{ date }}</div> /.確認用 -->
 <div class="row">
-  <Grid
-    search="true"
-    sort="true"
-    resizable="false"
-    fixedHeader="true"
-    {columns}
-    {pagination}
-    {style}
-    {data}
-  />
+  <Datatable
+    {handler}
+    search={true}
+    rowsPerPage={true}
+    rowCount={true}
+    pagination={true}
+  >
+    <table>
+      <thead>
+        <tr>
+          <Th {handler} orderBy="Acceptance_Id">番号</Th>
+          <Th {handler} orderBy="Acceptance_Time">受付時間</Th>
+          <Th {handler} orderBy="Patient_Information">患者番号</Th>
+          <Th {handler} orderBy="Patient_Information">患者氏名</Th>
+          <Th {handler} orderBy="Start_date">性</Th>
+          <Th {handler} orderBy="Patient_Information">年齢</Th>
+          <Th {handler} orderBy="Physician_WholeName">ドクター</Th>
+          <Th {handler} orderBy="Department_WholeName">診療科</Th>
+          <Th {handler} orderBy="Office">内容</Th>
+          <Th {handler} orderBy="Physician_WholeName">保険</Th>
+          <Th {handler} orderBy="Office">会計</Th>
+        </tr>
+        <!--
+            <tr>
+                <ThFilter {handler} filterBy="Acceptance_Id" />
+                <ThFilter {handler} filterBy="Acceptance_Time"/>
+                <ThFilter {handler} filterBy="Patient_Information" />
+                <ThFilter {handler} filterBy="Patient_Information" />
+                <ThFilter {handler} filterBy="Patient_Information" />
+                <ThFilter {handler} filterBy="BirthDate" />
+                <ThFilter {handler} filterBy="Physician_WholeName" />
+            </tr>
+            -->
+      </thead>
+      <tbody>
+        {#each $rows as row}
+          <tr>
+            <td on:click={() => SelectRow(row.id)}
+              >{Number(row.Acceptance_Id)}</td
+            >
+            <td>{row.Acceptance_Time}</td>
+            <td>{Number(row.Patient_Information.Patient_ID)}</td>
+            <td>{row.Patient_Information.WholeName}</td>
+            <td>{Sex(row.Patient_Information.Sex)}</td>
+            <td>{calcAge(row.Patient_Information.BirthDate, date)}才</td>
+            <td>{row.Physician_WholeName}</td>
+            <td>{row.Department_Code} {row.Department_WholeName}</td>
+            <td>{row.Medical_Information} {getSrynaiyo(row.Medical_Information)}</td>
+            <td>
+              {row.HealthInsurance_Information.Insurance_Combination_Number}
+              {row.HealthInsurance_Information.InsuranceProvider_WholeName}
+              {Kohname(row.PublicInsurance_Information)}
+            </td>
+            <td>{Account(row.Account_Time)}</td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  </Datatable>
 </div>
+
+<style>
+  table {
+    white-space: nowrap;
+  }
+  thead {
+    background: #fff;
+  }
+  tbody td {
+    border: 1px solid #f5f5f5;
+    padding: 4px 20px;
+  }
+  tbody tr {
+    transition: all, 0.2s;
+  }
+
+  /*偶数行ごとに色分け*/
+  table tr:nth-child(even) td {
+    /*border-top: 1px solid #ccc;*/
+
+    background-color: #eee;
+  }
+</style>

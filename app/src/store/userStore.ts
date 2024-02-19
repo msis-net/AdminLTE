@@ -1,6 +1,6 @@
 import { persistentAtom } from '@nanostores/persistent';
 
-const currentDate = persistentAtom<string>('currentDate', '' );
+//const currentDate = persistentAtom<string>('currentDate', '' );
 //export const statusStore = persistentAtom('');
 
 export type SettingsValue = {
@@ -11,6 +11,9 @@ export type SettingsValue = {
     vSrynaiyo: {},
   }
 
-const valData = persistentAtom('valdata', '')
+const vDate = persistentAtom('vDate', '')
+const vHospinf = persistentAtom('vHospinf', '')
+const vByoto = persistentAtom('vByoto', '')
+const vSrynaiyo = persistentAtom('vSrynaiyo', '')
 
-export { currentDate ,valData }
+export { vDate, vHospinf, vByoto, vSrynaiyo }
